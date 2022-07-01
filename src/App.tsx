@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
 import OpenSheetMusicDisplayContainer from './containers/OpenSheetMusicDisplayContainer';
+import ControlPannelContainer from './containers/ControlPannelContainer';
 
 function App() {
   return (
@@ -8,9 +9,7 @@ function App() {
       <div className="left">
         <div className="inner">
           <OpenSheetMusicDisplayContainer />
-          <div className="controll-pannel">
-            <div className="measure-1"></div>
-          </div>
+          <ControlPannelContainer />
         </div>
       </div>
 
