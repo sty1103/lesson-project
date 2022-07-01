@@ -1,16 +1,21 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import OpenSheetMusicDisplayContainer from './containers/OpenSheetMusicDisplayContainer';
 
 function App() {
   return (
     <div className="App">
       <div className="left">
-        <OpenSheetMusicDisplayContainer />
+        <div className="inner">
+          <OpenSheetMusicDisplayContainer />
+          <div className="controll-pannel">
+            <div className="measure-1"></div>
+          </div>
+        </div>
       </div>
-      
-      <div className="right">
 
+      <div className="right">
+        Chat
       </div>
     </div>
   );
