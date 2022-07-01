@@ -1,9 +1,11 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useContext } from 'react';
 import OpenSheetMusicDisplay from '../components/OpenSheetMusicDisplay';
 import { OpenSheetMusicDisplay as OSMD } from 'opensheetmusicdisplay';
+import AppContext from '../contexts/AppContext';
 
 const OpenSheetMusicDisplayContainer: React.FC = () => {
   const file = "Beethoven_AnDieFerneGeliebte.xml";
+  const { setOsmd } = useContext(AppContext);
   const divRef = useRef<HTMLDivElement>(null);
 
   const loadScore = useCallback(() => {
@@ -12,12 +14,10 @@ const OpenSheetMusicDisplayContainer: React.FC = () => {
       drawTitle: true
     }
 
-    const osmd = new OSMD(divRef.current as HTMLElement, options);
-    osmd.load(file).then(() => {
-      osmd.render();
-      console.log( osmd.GraphicSheet.MeasureList[0][0].PositionAndShape.Size.width );
-      // console.log( osmd.GraphicSheet.MeasureList[0][0].staffEntries[0] );
-      // console.log( osmd.GraphicSheet.Title.PositionAndShape.AbsolutePosition )
+    const osmdi = new OSMD(divRef.current as HTMLElement, options);
+    osmdi.load(file).then(() => {
+      osmdi.render();
+      setOsmd(() => osmdi);
     });
   }, []);
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-interface Props {
+interface IOpenSheetMusicDisplayProps {
   loadScore: Function;
   divRef: React.RefObject<HTMLDivElement>;
 }
 
-const OpenSheetMusicDisplay: React.FC<Props> = ({ loadScore, divRef }: Props) => {
+const OpenSheetMusicDisplay: React.FC<IOpenSheetMusicDisplayProps> = ({ loadScore, divRef }: IOpenSheetMusicDisplayProps) => {
   useEffect(() => {
     loadScore();
   }, []);
