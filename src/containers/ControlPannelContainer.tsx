@@ -20,11 +20,11 @@ const ControlPannelContainer: React.FC = () => {
     // 마디 루프...
     osmd?.GraphicSheet.MeasureList.forEach((staffs) => {
       const measure: TMeasure = [];
-      // 역할 루프...
+      // 보표 루프...
       staffs.forEach((staff) => {
-        const top = (staff.PositionAndShape.AbsolutePosition.y * 10).toString();
-        const left = (staff.PositionAndShape.AbsolutePosition.x * 10).toString();
-        const width = (staff.PositionAndShape.Size.width * 10).toString();
+        const top   = (staff.PositionAndShape.AbsolutePosition.y * 10).toString() + 'px';
+        const left  = (staff.PositionAndShape.AbsolutePosition.x * 10).toString() + 'px';
+        const width = (staff.PositionAndShape.Size.width * 10).toString() + 'px';
         const height = "41";
 
         measure.push({ top, left, width, height });

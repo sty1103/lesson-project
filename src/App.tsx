@@ -7,7 +7,7 @@ import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
 
 function App() {
   const [ osmd, setOsmd ] = useState<OpenSheetMusicDisplay | null>(null);
-
+  
   return (
     <AppContext.Provider value={{osmd, setOsmd}}>
       <div className="App">

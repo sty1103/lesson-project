@@ -5,7 +5,7 @@ interface IOpenSheetMusicDisplayProps {
   divRef: React.RefObject<HTMLDivElement>;
 }
 
-const OpenSheetMusicDisplay: React.FC<IOpenSheetMusicDisplayProps> = ({ loadScore, divRef }: IOpenSheetMusicDisplayProps) => {
+const OpenSheetMusicDisplay: React.FC<IOpenSheetMusicDisplayProps> = ({ loadScore, divRef }) => {
   useEffect(() => {
     loadScore();
   }, []);

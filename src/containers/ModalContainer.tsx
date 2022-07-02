@@ -1,8 +1,16 @@
 import React from 'react';
 import Modal from '../components/Modal';
 
-const ModalContainer: React.FC = () => {
-  return <Modal />
+interface ModalContainerProps {
+  children?: JSX.Element|JSX.Element[];
+}
+
+const ModalContainer: React.FC<ModalContainerProps> = ({ children }) => {
+  return (
+    <Modal>
+      {children}
+    </Modal>
+  );
 }
 
 export default ModalContainer;

@@ -1,31 +1,27 @@
-import React from 'react';
-import styles from '../styles/Modal.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import React, { useContext } from 'react';
+import '../styles/Modal.scss';
+import ModalContext from '../contexts/ModalContext';
 
-const Modal: React.FC = () => {
+interface ModalProps {
+  children?: JSX.Element | JSX.Element[];
+}
+
+const Modal: React.FC<ModalProps> = ({ children }) => {
+  const { modal, setModal } = useContext(ModalContext);
+
+  
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.background}></div>
-
-      <div className={styles.modal}>
-        <div className={styles.header}>
-          마디 노트
-          <button className={styles.close}>
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
-        </div>
-
-        <div className={styles.body}>
-          마디 노트 내용
-        </div>
-
-        <div className={styles.footer}>
-          마디 노트 푸터
-        </div>
+    <>
+      <div className={`modal-background ${modal ? 'show':''}`} onClick={closeModal}></div>
+      <div className={`modal ${modal ? 'show':''}`}>
+        {children}
       </div>
-    </div>
+    </>
   )
+  
+  function closeModal() {
+    setModal(() => false);
+  }
 }
 
 export default Modal;

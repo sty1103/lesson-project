@@ -1,5 +1,5 @@
-import { GraphicalMusicSheet, OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
-import React, { createContext } from 'react';
+import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
+import { createContext } from 'react';
 
 interface IAppContext {
   osmd: OpenSheetMusicDisplay | null;
