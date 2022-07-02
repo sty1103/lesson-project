@@ -5,6 +5,7 @@ import ModalContainer from '../containers/ModalContainer';
 import ModalContext from '../contexts/ModalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import Button from '../components/Button';
 
 /*
   부모 요소가 relative이어야 하고,
@@ -56,18 +57,56 @@ const ControlPannel: React.FC<ControlPannelProps> = ({ calMeasurePosition }: Con
       <ModalContext.Provider value={{ modal, setModal }}>
         <ModalContainer>
           <div className='modal-header'>
-            마디 {modalHeader.measure}, 보표 {modalHeader.staff}  노트
+            마디 {modalHeader.measure}, 보표 {modalHeader.staff} 노트
             <button className='modal-close' onClick={closeModal}>
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
 
           <div className='modal-body'>
-            마디 노트 내용
+            <div className={`${styles['item']} ${styles.teacher}`}>
+              <div className={styles['item-header']}>
+                <img src='/profile1.webp' alt="profile1" />
+                <span>Abbey</span>
+                <span>2022.07.01</span>
+              </div>
+              <div className={styles['item-body']}>
+                조표에 #이 있을 경우, 마지막 # 바로 위음이 장조를 결정합니다.
+              </div>
+            </div>
+
+            <div className={styles['item']}>
+              <div className={styles['item-header']}>
+                <img src='/profile2.jpeg' alt="profile1" />
+                <span>Mark</span>
+                <span>2022.07.01</span>
+              </div>
+              <div className={styles['item-body']}>
+                연주 영상 업로드해주실 수 있나요?
+              </div>
+            </div>
+
+            <div className={`${styles['item']} ${styles.teacher}`}>
+              <div className={styles['item-header']}>
+                <img src='/profile1.webp' alt="profile1" />
+                <span>Abbey</span>
+                <span>2022.07.02</span>
+              </div>
+              <div className={styles['item-body']}>
+                영상 참고 바랍니다.
+                <video controls>
+                  <source src='/piano_play.mov'
+                          type="video/mp4" />
+                  브라우저가 비디오 재생을 지원히지 않습니다.
+                </video>
+              </div>
+            </div>
           </div>
 
           <div className='modal-footer'>
-            마디 노트 푸터
+            <Button>
+              글쓰기
+            </Button>
           </div>
         </ModalContainer>
       </ModalContext.Provider>
