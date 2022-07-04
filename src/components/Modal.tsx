@@ -7,20 +7,20 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ children }) => {
-  const { modal, setModal } = useContext(ModalContext);
+  const { modalShow, setModalShow } = useContext(ModalContext);
 
   
   return (
     <>
-      <div className={`modal-background ${modal ? 'show':''}`} onClick={closeModal}></div>
-      <div className={`modal ${modal ? 'show':''}`}>
+      <div className={`modal-background ${modalShow ? 'show':''}`} onClick={closeModal}></div>
+      <div className={`modal ${modalShow ? 'show':''}`}>
         {children}
       </div>
     </>
   )
   
   function closeModal() {
-    setModal(() => false);
+    setModalShow(() => false);
   }
 }
 

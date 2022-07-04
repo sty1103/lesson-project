@@ -7,6 +7,7 @@ interface IStaff {
   left: string;
   width: string;
   height: string;
+  isNoted: boolean;
 }
 
 type TMeasure = IStaff[];
@@ -26,8 +27,9 @@ const ControlPannelContainer: React.FC = () => {
         const left  = (staff.PositionAndShape.AbsolutePosition.x * 10).toString() + 'px';
         const width = (staff.PositionAndShape.Size.width * 10).toString() + 'px';
         const height = "41";
+        const isNoted = (Math.floor(Math.random() * 10)) % 3 === 0; // 임시 랜덤
 
-        measure.push({ top, left, width, height });
+        measure.push({ top, left, width, height, isNoted });
       });
       
       measures.push( measure );

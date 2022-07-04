@@ -4,8 +4,17 @@ import { createContext } from 'react';
 interface IAppContext {
   osmd: OpenSheetMusicDisplay | null;
   setOsmd: Function;
+  activeMeasure: number;
+  setActiveMeasure: Function;
 }
 
-const AppContext = createContext<IAppContext>({ osmd: null, setOsmd: () => {} });
+const props = {
+  osmd: null,
+  setOsmd: () => {},
+  activeMeasure: -1,
+  setActiveMeasure: () => {}
+}
+
+const AppContext = createContext<IAppContext>(props);
 
 export default AppContext;

@@ -1,4 +1,4 @@
-.control-pannel {
+.main {
   position: absolute;
   top: 0;
   left: 0;
@@ -11,9 +11,32 @@
     cursor: pointer;
   }
   
+  .measure.noted {
+    background: orange;
+    opacity: .3;
+  }
+
   .measure:hover {
     background: orange;
     opacity: .3;
+  }
+  
+  .measure.active {
+    @keyframes blink {
+      0% {
+        background: rgba(0,0,255,1)
+      }
+      50% {
+        background: rgba(0,0,255,0.0)
+      }
+      100% {
+        background: rgba(0,0,255,1)
+      }
+    }
+
+    opacity: .3;
+    animation: blink normal 1s infinite ease-in-out;
+    animation-iteration-count: 1.5;
   }
 
   .item {
@@ -71,7 +94,42 @@
   //   background: #f6f6f6;
   // }
 
-  button {
-    margin-left: auto;
+  .write {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 60px;
+
+    [contentEditable] {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      min-height: 60px;
+      max-height: 300px;
+      font-size: .8em;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    [contentEditable]:empty:before {
+      content: "글 내용을 입력해 주세요";
+      color: gray;
+    }
+
+    .btn-group {
+      display: flex;
+
+      button {
+        margin-right: 5px;
+      }
+
+      button:last-child {
+        margin-right: 0;
+      }
+
+      .save {
+        margin-left: auto;
+      }
+    }
   }
 }

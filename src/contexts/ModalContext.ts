@@ -1,10 +1,10 @@
 import { createContext } from 'react';
 
 interface IModalContext {
-  modal: boolean;
-  setModal: Function;
+  modalShow: boolean;
+  setModalShow: Function;
 }
 
-const ModalContext = createContext<IModalContext>({ modal: false, setModal: () => {} });
+const ModalContext = createContext<IModalContext>({ modalShow: false, setModalShow: () => {} });
 
 export default ModalContext;

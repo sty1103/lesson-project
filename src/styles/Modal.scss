@@ -49,6 +49,14 @@
     min-height: calc(100% - 140px);
     max-height: 60vh;
     overflow-y: auto;
+    
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  
+  }
+
+  .modal-body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
   }
 
   .modal-footer {

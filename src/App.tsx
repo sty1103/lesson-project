@@ -4,12 +4,18 @@ import OpenSheetMusicDisplayContainer from './containers/OpenSheetMusicDisplayCo
 import ControlPannelContainer from './containers/ControlPannelContainer';
 import AppContext from './contexts/AppContext';
 import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
+import ChatContainer from './containers/ChatCotnainer';
 
 function App() {
   const [ osmd, setOsmd ] = useState<OpenSheetMusicDisplay | null>(null);
+  const [ activeMeasure, setActiveMeasure ] = useState(-1);
+
+  const props = {
+    osmd, setOsmd, activeMeasure, setActiveMeasure
+  }
   
   return (
-    <AppContext.Provider value={{osmd, setOsmd}}>
+    <AppContext.Provider value={props}>
       <div className="App">
         <div className="left">
           <div className="inner">
@@ -19,7 +25,7 @@ function App() {
         </div>
 
         <div className="right">
-          Chat
+          <ChatContainer />
         </div>
       </div>
     </AppContext.Provider>

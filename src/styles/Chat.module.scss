@@ -1,0 +1,40 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+
+  .opponent {
+    margin-right: auto;
+
+    .profile {
+      display: flex;
+      align-items: center;
+      margin-right: auto;
+
+      img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      span {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .message {
+    margin-top: 10px;
+    max-width: 300px;
+    background: #ddd;
+    padding: 12px;
+    border-radius: 25px;
+
+    .activeMeasure {
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}

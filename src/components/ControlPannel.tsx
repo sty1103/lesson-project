@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { TMeasures } from '../containers/ControlPannelContainer';
 import styles from '../styles/ControlPannel.module.scss';
 import ModalContainer from '../containers/ModalContainer';
 import ModalContext from '../contexts/ModalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faCamera, faVideo } from "@fortawesome/free-solid-svg-icons";
 import Button from '../components/Button';
+import AppContext from '../contexts/AppContext';
 
 /*
   부모 요소가 relative이어야 하고,
@@ -25,7 +26,8 @@ interface IModalHeader {
 
 const ControlPannel: React.FC<ControlPannelProps> = ({ calMeasurePosition }: ControlPannelProps) => {
   const [ measures, setMeasures ] = useState<TMeasures>([]);
-  const [ modal, setModal ] = useState(false);
+  const { activeMeasure } = useContext(AppContext);
+  const [ modalShow, setModalShow ] = useState(false);
   const [ modalHeader, setModalHeader ] = useState<IModalHeader>({ measure:0, staff:0 });
 
   useEffect(() => {
@@ -33,14 +35,19 @@ const ControlPannel: React.FC<ControlPannelProps> = ({ calMeasurePosition }: Con
   }, [calMeasurePosition]);
 
   return (
-    <div className={styles[`control-pannel`]}>
+    <section className={styles.main}>
       {
         measures.map((measure, i) => {
           return measure.map((staff, j) => {
             return (
               <div 
-                key={j} 
-                className={styles[`measure`]}
+                key={j}
+                className={`
+                  ${styles[`measure`]}
+                  measure${i+1} staff${j+1}
+                  ${staff.isNoted ? `${styles.noted}`:''}
+                  ${activeMeasure===i ? styles.active:''}
+                `}
                 style={{
                   top: `${staff.top}`,
                   left: `${staff.left}`,
@@ -54,7 +61,7 @@ const ControlPannel: React.FC<ControlPannelProps> = ({ calMeasurePosition }: Con
         })
       }
 
-      <ModalContext.Provider value={{ modal, setModal }}>
+      <ModalContext.Provider value={{ modalShow, setModalShow }}>
         <ModalContainer>
           <div className='modal-header'>
             마디 {modalHeader.measure}, 보표 {modalHeader.staff} 노트
@@ -101,25 +108,35 @@ const ControlPannel: React.FC<ControlPannelProps> = ({ calMeasurePosition }: Con
                 </video>
               </div>
             </div>
-          </div>
 
-          <div className='modal-footer'>
-            <Button>
-              글쓰기
-            </Button>
+            <div className={styles.write}>
+              <div contentEditable='true'></div>
+
+              <div className={styles['btn-group']}>
+                <Button className={styles.picture}>
+                  <FontAwesomeIcon icon={faCamera} />
+                </Button>
+                <Button className={styles.videoe}>
+                  <FontAwesomeIcon icon={faVideo} />
+                </Button>
+                <Button className={styles.save}>
+                  글쓰기
+                </Button>
+              </div>
+            </div>
           </div>
         </ModalContainer>
       </ModalContext.Provider>
-    </div>
+    </section>
   )
 
   function clickMeasure(measure: number, staff: number) {
-    setModal(() => true);
+    setModalShow(() => true);
     setModalHeader(() => ({measure, staff}));
   }
 
   function closeModal() {
-    setModal(() => false);
+    setModalShow(() => false);
   }
 }
 
