@@ -14,10 +14,10 @@ const OpenSheetMusicDisplayContainer: React.FC = () => {
       drawTitle: true
     }
 
-    const osmdi = new OSMD(divRef.current as HTMLElement, options);
-    osmdi.load(file).then(() => {
-      osmdi.render();
-      setOsmd(() => osmdi);
+    const osmd = new OSMD(divRef.current as HTMLElement, options);
+    osmd.load(file).then(() => {
+      osmd.render();
+      setOsmd(() => osmd);
     });
   }, []);
 
