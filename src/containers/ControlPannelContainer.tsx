@@ -1,7 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 import ControlPannel from '../components/ControlPannel';
 import AppContext from '../contexts/AppContext';
-import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
 
 interface IStaff {
   top: string;
@@ -20,35 +19,34 @@ const ControlPannelContainer: React.FC = () => {
 
   let timeout: ReturnType<typeof setTimeout>;
   let rerender = () => {
-    if ( timeout ) {
+    if ( timeout )
       clearTimeout(timeout);
-    }
 
-    timeout = setTimeout(() => { 
+    timeout = setTimeout(() => {
       if ( osmd ) {
+        // 클래스 복사
         let Osmd = Object.assign(Object.create(Object.getPrototypeOf(osmd)), osmd)
         setOsmd(() => Osmd);
       }
 
       // resize 이벤트가 여러개 달릴 수 있기 때문에 갱신 때마다 초기화 시켜줌
-      window.removeEventListener('resize', rerender)
+      window.removeEventListener('resize', rerender);
     }, 400);
   }
 
-  // 
   window.addEventListener('resize', rerender);
+
   const calMeasurePosition = useCallback(() => {
-    console.log( 'calMeasurePosition', osmd?.GraphicSheet.MeasureList[3][2].PositionAndShape.AbsolutePosition );
     const measures: TMeasures = [];
     // 마디 루프...
     osmd?.GraphicSheet?.MeasureList.forEach((staffs) => {
       const measure: TMeasure = [];
       // 보표 루프...
       staffs.forEach((staff) => {
-        const top   = (staff.PositionAndShape.AbsolutePosition.y * 10).toString() + 'px';
-        const left  = (staff.PositionAndShape.AbsolutePosition.x * 10).toString() + 'px';
-        const width = (staff.PositionAndShape.Size.width * 10).toString() + 'px';
-        const height = "41";
+        const top     = (staff.PositionAndShape.AbsolutePosition.y * 10).toString() + 'px';
+        const left    = (staff.PositionAndShape.AbsolutePosition.x * 10).toString() + 'px';
+        const width   = (staff.PositionAndShape.Size.width * 10).toString() + 'px';
+        const height  = "41";
         const isNoted = (Math.floor(Math.random() * 10)) % 3 === 0; // 임시 랜덤
 
         measure.push({ top, left, width, height, isNoted });
